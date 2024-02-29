@@ -28,7 +28,7 @@
                         value="{{ $category->category }}" id="{{ $category->id }}"
                         @isset($checkCategory)
                             @if (in_array($category->category, $checkCategory)) {{ 'checked' }} @endif 
-                        @endisset required>
+                        @endisset >
 
                     <label class="form-check-label" for="${id}">{{ $category->category }}</label>
                 </div>
@@ -74,7 +74,7 @@
 
     <div class="mb-3 text-center">
         <button id="submit" name="submit" type="submit" class="btn btn-dark mx-2">{{ isset($data) ? "Update" : "Save"}}</button>
-        <button id="reset" name="reset" type="button" class="btn btn-dark mx-2">Reset</button>
+        <button id="reset" name="reset" type="reset" class="btn btn-dark mx-2">Reset</button>
     </div>
 
 

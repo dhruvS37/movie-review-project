@@ -9,13 +9,19 @@ use App\Models\MovieCastMapping;
 use App\Models\MovieCategoryMapping;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
+        // return Auth::user();
         $categories = Category::all();
         $casts = Cast::all();
         $movie = Movie::movieInfo(['category', 'cast'])
@@ -32,6 +38,7 @@ class MovieController extends Controller
     {
         $this->validate($request, [
             'movieName' => 'required|max:50',
+            'category' => 'required',
             'rating' => 'required|between:0,5'
         ]);
 
@@ -77,9 +84,10 @@ class MovieController extends Controller
     {
         $this->validate($request, [
             'movieName' => 'required|max:50',
+            'category' => 'required',
             'rating' => 'required|between:0,5'
         ]);
-        
+
         $putData = $request->all();
 
         $movieModel = Movie::find($id);

@@ -19,7 +19,7 @@ $(document).ready(function () {
     $('#reset').click(function (event) {
         event.preventDefault();
 
-        $("#movieNameInput").val("");
+        $("#movieNameInput").val(null);
         $('.checkInput').prop("checked", false)
         $('#castAndCrewInput').val(null).trigger('change');
         $('#ratingInput').val(null).trigger('change');
