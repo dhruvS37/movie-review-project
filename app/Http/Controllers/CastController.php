@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CastController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function showInsertCastForm(){
+        return view('cast');
+    }
+
     public function insertCast(Request $request){
         $cast = new Cast();
         

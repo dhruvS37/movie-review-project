@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show(){
         $category = Movie::find(56)->categories()->wherePivot('status',1)->pluck('category');
         $movie = Category::find(1)->movies;
@@ -24,6 +29,10 @@ class CategoryController extends Controller
         return $category;
     }
 
+    public function showInsertCategoryForm(){
+        return view('category');
+    }
+    
     public function insertCategory(Request $request){
         $category = new Category;
         
@@ -35,3 +44,4 @@ class CategoryController extends Controller
             return redirect('category')->with('error_massage', 'An error ocuurs. Please try again!');
     }
 }
+

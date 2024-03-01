@@ -22,14 +22,10 @@ Route::get('/', function () {
 
 // Route::get('/home','HomeController@show');
 
-Route::get('/category', function () {
-    return view('category');
-});
+Route::get('/category', 'CategoryController@showInsertCategoryForm');
 Route::post('/category', 'CategoryController@insertCategory');
 
-Route::get('/cast', function () {
-    return view('cast');
-});
+Route::get('/cast', 'CastController@showInsertCastForm');
 Route::post('/cast','CastController@insertCast');
 
 // Route::post('/',)
@@ -46,7 +42,7 @@ Route::post('logout','Auth\LoginController@logout')->name('logout');
 
 Route::name('password.')->group(function(){
     Route::get('password/reset','Auth\ForgotPasswordController@showLinkRequestForm')->name('request');
-    Route::post('password/email','Auth\ForgotPasswordController@sendResetLink')->name('email');
+    Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail')->name('email');
     Route::get('password/reset/{token}','Auth\ResetPasswordController@showResetForm')->name('reset');
     Route::post('password/reset','Auth\ResetPasswordController@reset');
 });

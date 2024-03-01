@@ -34,18 +34,4 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function sendResetLink(Request $request)
-    {
-        $this->validate($request, ['email' => 'required|email']);
-
-        if ($user = User::where('email', $request->input('email'))->first()) {
-
-            $token = str_random(64);
-
-            DB::table(config('auth.passwords.users.table'))->updateOrInsert(['email' => $user->email], ['token' => $token]);
-
-            return redirect()->back()->with('resetLink', "password/reset/$token");
-        }
-        return redirect()->back()->withErrors(['email' => trans(Password::INVALID_USER)]);
-    }
 }

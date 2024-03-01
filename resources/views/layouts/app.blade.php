@@ -49,7 +49,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-2">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Movie Review</a>
+                <a class="navbar-brand mx-3" href="{{ env('APP_URL') }}">Movie Review</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
