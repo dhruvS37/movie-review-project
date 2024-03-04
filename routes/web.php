@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/home','HomeController@show');
+Route::resource('/home', 'MovieController',['exept'=>['home.create','home.edit']]);
 
 Route::get('/category', 'CategoryController@showInsertCategoryForm');
 Route::post('/category', 'CategoryController@insertCategory');
@@ -28,12 +28,10 @@ Route::post('/category', 'CategoryController@insertCategory');
 Route::get('/cast', 'CastController@showInsertCastForm');
 Route::post('/cast','CastController@insertCast');
 
-// Route::post('/',)
-Route::resource('/home', 'MovieController',['exept'=>['home.create','home.edit']]);
+Route::get('/filters','FilterController@index');
+Route::get('/myfilters','FilterController@filterData');
 
-Route::get('/resetPassword',function($resetLink){
-    return $resetLink;
-})->name('resetLink');
+
 
 // Auth::routes();
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');

@@ -13,6 +13,8 @@ class Movie extends Model
 
     public function scopeMovieInfo(Builder $query, $colums = [])
     {
+
+
         $query->leftjoin('movie_category_mapping', function ($join) {
             $join->on('movies.id', '=', 'movie_category_mapping.movie_id')->where('movie_category_mapping.status', '1');
         })
@@ -26,9 +28,7 @@ class Movie extends Model
                 $join->on('movie_cast_mapping.cast_id', '=', 'cast_and_crew.id')->where('cast_and_crew.status', '1');
             })->select('movies.id', 'movies.movie_name', 'movies.rating');
 
-
         if (!empty($colums)) {
-
 
             if (in_array('category', $colums)) {
                 $query->addSelect(DB::raw('GROUP_CONCAT(DISTINCT categories.category) AS categories'));
@@ -43,10 +43,10 @@ class Movie extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('App\Models\Category', 'movie_category_mapping')->withPivot('status')->wherePivot('status',1);
+        return $this->belongsToMany('App\Models\Category', 'movie_category_mapping')->withPivot('status')->wherePivot('status', 1);
     }
     public function casts()
     {
-        return $this->belongsToMany('App\Models\Cast', 'movie_cast_mapping')->withPivot('status')->wherePivot('status',1);
+        return $this->belongsToMany('App\Models\Cast', 'movie_cast_mapping')->withPivot('status')->wherePivot('status', 1);
     }
 }

@@ -29,6 +29,9 @@
     <!-- select2 cdn -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="{{ asset('js/jquery.ba-bbq.js') }}"></script>
+    <script src="{{ asset('js/bbq.min.js') }}"></script>
     <style>
         @keyframes fadeIn {
             0% {
@@ -51,42 +54,46 @@
             <div class="container-fluid">
                 <a class="navbar-brand mx-3" href="{{ env('APP_URL') }}">Movie Review</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-flex flex-row justify-content-between" id="navbarScroll">
+
+                <div class="collapse navbar-collapse d-flex flex-row justify-content-evenly" id="navbarScroll">
                     <ul class="navbar-nav  my-2 my-lg-0 navbar-nav-scroll w-75" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a class="nav-link {{ Auth::check() ? 'active' : ''}}" aria-current="page" href="/home">Home</a>
+                            <a class="nav-link {{ Auth::check() && Request::is('home')? 'active' : ''}}" aria-current="page" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Auth::check() && Request::is('filters') ? 'active' : ''}}" aria-current="page" href="/filters">Filter</a>
                         </li>
 
-                    </ul>
-                    <ul class="navbar-nav mx-5" style="--bs-scroll-height: 100px;">
-                        @if (Auth::guest())
-                            <li class="nav-item"><a class="nav-link {{ Request::is('login') ? 'active' : ''}}" href="{{ route('login') }}">Login</a></li>
-                            <li class="nav-item"><a class="nav-link {{ Request::is('register') ? 'active' : ''}}" href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }} 
-                                </a>
-                                <ul class="dropdown-menu end-0">
-                                    <li>
-                                        <a class="dropdown-item " href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
+                        <ul class="navbar-nav mx-5" style="--bs-scroll-height: 100px;">
+                            @if (Auth::guest())
+                                <li class="nav-item"><a class="nav-link {{ Request::is('login') ? 'active' : ''}}" href="{{ route('login') }}">Login</a></li>
+                                <li class="nav-item"><a class="nav-link {{ Request::is('register') ? 'active' : ''}}" href="{{ route('register') }}">Register</a></li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ Auth::user()->name }} 
+                                    </a>
+                                    <ul class="dropdown-menu end-0">
+                                        <li>
+                                            <a class="dropdown-item " href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+    
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+                        </ul>
                     </ul>
                 </div>
             </div>
