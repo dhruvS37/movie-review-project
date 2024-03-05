@@ -65,35 +65,35 @@
                             <a class="nav-link {{ Auth::check() && Request::is('home')? 'active' : ''}}" aria-current="page" href="/home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Auth::check() && Request::is('filters') ? 'active' : ''}}" aria-current="page" href="/filters">Filter</a>
+                            <a class="nav-link {{ Request::is('filters') ? 'active' : ''}}" aria-current="page" href="/filters">Filter</a>
                         </li>
 
-                        <ul class="navbar-nav mx-5" style="--bs-scroll-height: 100px;">
-                            @if (Auth::guest())
-                                <li class="nav-item"><a class="nav-link {{ Request::is('login') ? 'active' : ''}}" href="{{ route('login') }}">Login</a></li>
-                                <li class="nav-item"><a class="nav-link {{ Request::is('register') ? 'active' : ''}}" href="{{ route('register') }}">Register</a></li>
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ Auth::user()->name }} 
-                                    </a>
-                                    <ul class="dropdown-menu end-0">
-                                        <li>
-                                            <a class="dropdown-item " href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
-    
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </li>
-                            @endif
-                        </ul>
+                    </ul>
+                    <ul class="navbar-nav mx-5" style="--bs-scroll-height: 100px;">
+                        @if (Auth::guest())
+                            <li class="nav-item"><a class="nav-link {{ Request::is('login') ? 'active' : ''}}" href="{{ route('login') }}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link {{ Request::is('register') ? 'active' : ''}}" href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }} 
+                                </a>
+                                <ul class="dropdown-menu end-0">
+                                    <li>
+                                        <a class="dropdown-item " href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
